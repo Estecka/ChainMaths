@@ -153,11 +153,32 @@ namespace Estecka.ChainMaths {
 			return new Vector2 (yAxis.y, -yAxis.x);
 		}
 		/// <summary>
-		/// Rotaotes this Vector2 by 90° to the left and returns it.
+		/// Rotates this Vector2 by 90° to the left and returns it.
 		/// </summary>
 		/// <returns>The rotated vector</returns>
 		public static Vector2 CounterClockwisePerpendicular(this Vector2 xAxis){
 			return new Vector2 (-xAxis.y, xAxis.x);
+		}
+
+		/// <summary>
+		/// Returns the angle in degree that points in the same direction as this Vector
+		/// </summary>
+		public static float ToAngle(this Vector2 direction){
+			return Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+		}
+		/// <summary>
+		/// Returns the euler angles that would make a Transform look toward the same direction as this vector. Z will always be 0.
+		/// </summary>
+		public static Vector3 ToEulerAngles(this Vector3 direction){
+			Vector3 angles;
+			Vector2 hztDir = new Vector2( direction.z,       direction.x );
+			Vector2 vtcDir = new Vector2( hztDir.magnitude, -direction.y );
+
+			angles.y = hztDir.ToAngle();
+			angles.x = vtcDir.ToAngle();
+			angles.z = 0;
+
+			return angles;
 		}
 
 	} // END Extension
