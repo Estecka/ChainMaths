@@ -20,6 +20,19 @@ namespace Estecka.ChainMaths {
 		}
 
 		/// <summary>
+		/// Wraps this value between a maximum and a minimum. 
+		/// E.g: 370 wrapped between 0 and 360 returns 10.
+		/// </summary>
+		public static float Wrap (this float value, float min, float max){
+			float range = max-min; 
+			while (value < min)
+				value += range;
+			while (value > max)
+				value -= range;
+			return value;
+		}
+
+		/// <summary>
 		/// Clamps this float to the given maximum value.
 		/// </summary>
 		/// <param name="value">The value to be clamped</param>
